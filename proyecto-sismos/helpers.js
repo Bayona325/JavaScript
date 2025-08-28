@@ -1,4 +1,4 @@
-export const parseEvent = (f) => ({
+export const parseEvent = (f) => ({ //Funcion flecha
     id: f.id,
     mag: f.properties.mag ?? null,
     place: f.properties.place ?? "N/D",
@@ -21,14 +21,16 @@ export function isSignificant(earthquake, minMag = 6) {
 export const fmt = {
     //Funcion anonima asignada a una propiedad
     date: function (d) {return d.toISOString().slice(0, 19).replace("T", " ")},
-    coord: (c) => `${c.lat.toFixed(3)},${c.lon.toFixed(3)} (z=${c.depth}km)`
+    coord: (c) => `${c.lat.toFixed(3)},${c.lon.toFixed(3)} (z=${c.depth.toFixed(2)}km)`
 }
 
 //Tabla de categorias por tipo
 export const TypeDict = (() => {
     const dict = new Map();
     return {
-        add: (type) => dict.set(type, (dict.get(type) ?? 0) + 1),
+        add : (type) => dict.set(type, (dict.get(type) ?? 0) + 1),
         entries: () => [...dict.entries()],
+        //Vamos a agregar un clear
+        clear: () => dict.clear(),
     }
 })();
