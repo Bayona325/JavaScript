@@ -1,9 +1,8 @@
 const HOST = "https://earthquake.usgs.gov"
 const PATH = "/fdsnws/event/1/query"
 //const END_POINT = "format=geojson&starttime=2020-01-01&endtime=2020-01-02"
-//const END_POINT = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2020-01-01&endtime=2020-01-02"
 
-function buildUrl() {
+function buildUrl({start, end, limit = 20000}) {
     const p = new URLSearchParams({
         format: "geojson",
         starttime: start,
@@ -21,7 +20,7 @@ async function loadEarthQuakes(params) {
     return await result.json()
 }
 
-//Validar los datos con manejo de errores muy basico con try....
+//Validar los datos con manejo de errore muy basico con try....
 export const dataFromRequest = async (params) => {
     try {
         return await loadEarthQuakes(params)
